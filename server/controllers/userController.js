@@ -104,3 +104,43 @@ module.exports.updateUserProfile = async (req, res) => {
 
   return res.status(response.status).send(response);
 };
+// Get the modal
+var modal = document.getElementById('myModal');
+
+// Get the button that opens the modal
+var btn = document.getElementById("openModalBtn");
+
+// Get the <span> element that closes the modal
+var span = document.getElementsByClassName("close")[0];
+
+// When the user clicks the button, open the modal 
+btn.onclick = function() {
+  modal.style.display = "block";
+}
+
+// When the user clicks on <span> (x), close the modal
+span.onclick = function() {
+  modal.style.display = "none";
+}
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+  if (event.target == modal) {
+    modal.style.display = "none";
+  }
+}
+
+// Submit form action
+var editUsernameForm = document.getElementById("editUsernameForm");
+editUsernameForm.addEventListener("submit", function(event) {
+  event.preventDefault(); // Prevent form submission
+
+  // Get the new username
+  var newUsername = document.getElementById("newUsername").value;
+
+  // Update the username display (you may replace this with your own logic)
+  document.querySelector('.main-nav-item').innerText = newUsername;
+
+  // Close the modal
+  modal.style.display = "none";
+});

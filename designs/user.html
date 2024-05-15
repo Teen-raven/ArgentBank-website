@@ -1,75 +1,175 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Argent Bank - Home Page</title>
-    <link rel="stylesheet" href="./css/main.css" />
-    <link
-      rel="stylesheet"
-      href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
-    />
-  </head>
-  <body>
-    <nav class="main-nav">
-      <a class="main-nav-logo" href="./index.html">
-        <img
-          class="main-nav-logo-image"
-          src="./img/argentBankLogo.png"
-          alt="Argent Bank Logo"
-        />
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Argent Bank - Home Page</title>
+<link rel="stylesheet" href="./css/main.css">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<style type="text/css" id="operaUserStyle"></style>
+<style type="text/css"></style>
+<link rel="stylesheet" href="chrome-extension://emnoomldgleagdjapdeckpmebokijail/font/roboto-fonts.css" class="wtd-font">
+<link rel="stylesheet" href="chrome-extension://emnoomldgleagdjapdeckpmebokijail/font/unbounded-fonts.css" class="wtd-font">
+</head>
+<body>
+<nav class="main-nav">
+    <a class="main-nav-logo" href="./index.html">
+        <img class="main-nav-logo-image" src="./img/argentBankLogo.png" alt="Argent Bank Logo">
         <h1 class="sr-only">Argent Bank</h1>
-      </a>
-      <div>
+    </a>
+    <div>
         <a class="main-nav-item" href="./user.html">
-          <i class="fa fa-user-circle"></i>
-          Tony
+        <i class="fa fa-user-circle"></i>
+        Tony
         </a>
-        <a class="main-nav-item" href="./index.html">
+        <a id="signOutLink" class="main-nav-item" href="./index.html">
           <i class="fa fa-sign-out"></i>
           Sign Out
-        </a>
+      </a>
+      
+    </div>
+</nav>
+<main class="main bg-dark">
+    <div class="header">
+        <h1>Welcome back<br>Tony Jarvis!</h1>
+        <button id="openModalBtn">Edit Username</button>
+    </div>
+    <h2 class="sr-only">Accounts</h2>
+    <section class="account">
+        <div class="account-content-wrapper">
+        <h3 class="account-title">Argent Bank Checking (x8349)</h3>
+        <p class="account-amount">$2,082.79</p>
+        <p class="account-amount-description">Available Balance</p>
+        </div>
+        <div class="account-content-wrapper cta">
+        <button class="transaction-button">View transactions</button>
+        </div>
+    </section>
+    <section class="account">
+        <div class="account-content-wrapper">
+        <h3 class="account-title">Argent Bank Savings (x6712)</h3>
+        <p class="account-amount">$10,928.42</p>
+        <p class="account-amount-description">Available Balance</p>
+        </div>
+        <div class="account-content-wrapper cta">
+        <button class="transaction-button">View transactions</button>
+        </div>
+    </section>
+    <section class="account">
+        <div class="account-content-wrapper">
+        <h3 class="account-title">Argent Bank Credit Card (x8349)</h3>
+        <p class="account-amount">$184.30</p>
+        <p class="account-amount-description">Current Balance</p>
+        </div>
+        <div class="account-content-wrapper cta">
+        <button class="transaction-button">View transactions</button>
+        </div>
+    </section>
+</main>
+<footer class="footer">
+    <p class="footer-text">Copyright 2020 Argent Bank</p>
+</footer>
+
+<!-- Modal -->
+<div id="myModal" class="modal">
+    <div class="modal-content">
+        <span class="close">&times;</span>
+        <h3 class="Edittitle">Choose your new username</h3>
+        <form id="editUsernameForm">
+          <input type="text" id="newUsername" class="large-input" placeholder="Enter new username">
+            <button type="submit">Submit</button>
+        </form>
       </div>
-    </nav>
-    <main class="main bg-dark">
-      <div class="header">
-        <h1>Welcome back<br />Tony Jarvis!</h1>
-        <button id="edit-name-btn" class="edit-button">Edit Name</button>
-      </div>
-      <h2 class="sr-only">Accounts</h2>
-      <section class="account">
-        <div class="account-content-wrapper">
-          <h3 class="account-title">Argent Bank Checking (x8349)</h3>
-          <p class="account-amount">$2,082.79</p>
-          <p class="account-amount-description">Available Balance</p>
-        </div>
-        <div class="account-content-wrapper cta">
-          <button class="transaction-button">View transactions</button>
-        </div>
-      </section>
-      <section class="account">
-        <div class="account-content-wrapper">
-          <h3 class="account-title">Argent Bank Savings (x6712)</h3>
-          <p class="account-amount">$10,928.42</p>
-          <p class="account-amount-description">Available Balance</p>
-        </div>
-        <div class="account-content-wrapper cta">
-          <button class="transaction-button">View transactions</button>
-        </div>
-      </section>
-      <section class="account">
-        <div class="account-content-wrapper">
-          <h3 class="account-title">Argent Bank Credit Card (x8349)</h3>
-          <p class="account-amount">$184.30</p>
-          <p class="account-amount-description">Current Balance</p>
-        </div>
-        <div class="account-content-wrapper cta">
-          <button class="transaction-button">View transactions</button>
-        </div>
-      </section>
-    </main>
-    <footer class="footer">
-      <p class="footer-text">Copyright 2020 Argent Bank</p>
-    </footer>
-  </body>
+</div>
+<div id="confirmationMessage" style="display: none;"></div>
+<script>
+  // Get the modal
+  var modal = document.getElementById('myModal');
+
+  // Get the button that opens the modal
+  var btn = document.getElementById("openModalBtn");
+
+  // Get the <span> element that closes the modal
+  var span = document.getElementsByClassName("close")[0];
+
+  // When the user clicks the button, open the modal 
+  btn.onclick = function() {
+      modal.style.display = "block";
+  }
+
+  // When the user clicks on <span> (x), close the modal
+  span.onclick = function() {
+      modal.style.display = "none";
+  }
+
+  // When the user clicks anywhere outside of the modal, close it
+  window.onclick = function(event) {
+      if (event.target == modal) {
+          modal.style.display = "none";
+      }
+  }
+
+  // Submit form action
+  var editUsernameForm = document.getElementById("editUsernameForm");
+  editUsernameForm.addEventListener("submit", function(event) {
+      event.preventDefault(); // Prevent form submission
+
+      // Get the new username
+      var newUsername = document.getElementById("newUsername").value;
+
+      // Update the username display (you may replace this with your own logic)
+      document.querySelector('.main-nav-item').innerText = newUsername;
+
+      // Close the modal
+      modal.style.display = "none";
+  });
+// Ajoutez cet événement pour écouter la soumission du formulaire
+editUsernameForm.addEventListener("submit", function(event) {
+  event.preventDefault(); // Empêche la soumission par défaut du formulaire
+
+  // Récupérez le nouveau nom d'utilisateur
+  var newUsername = document.getElementById("newUsername").value;
+
+  // Affichez une boîte de dialogue de confirmation avec le nom choisi
+  var confirmationMessage = "New username: " + newUsername;
+  var isConfirmed = confirm(confirmationMessage);
+
+  if (isConfirmed) {
+    // Mettez à jour le nom d'utilisateur affiché (facultatif)
+    document.querySelector('.main-nav-item').innerText = newUsername;
+
+    // Fermez le modal après confirmation
+    modal.style.display = "none";
+  } else {
+  }
+  document.addEventListener('DOMContentLoaded', function() {
+    // Sélection du lien "Sign Out"
+    var signOutLink = document.getElementById('signOutLink');
+
+    // Ajout d'un gestionnaire d'événements pour le clic sur le lien
+    signOutLink.addEventListener('click', function(event) {
+        // Empêcher le comportement par défaut du lien (redirection vers la page d'accueil)
+        event.preventDefault();
+        
+        // Insérez ici le code pour effectuer la déconnexion de l'utilisateur
+        // Par exemple, vous pouvez appeler une fonction pour effectuer la déconnexion
+        logoutUser();
+    });
+});
+
+function logoutUser() {
+    // Ajoutez ici le code pour effectuer la déconnexion de l'utilisateur
+    // Par exemple, vous pouvez envoyer une requête au serveur pour déconnecter l'utilisateur
+    
+    // Une fois la déconnexion effectuée, vous pouvez rediriger l'utilisateur vers la page d'accueil
+    window.location.href = './index.html';
+}
+
+});
+
+
+</script>
+
+
+</body>
 </html>

@@ -3,7 +3,6 @@ const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
 
 module.exports.createUser = async serviceData => {
-  console.log(serviceData)
   try {
     const user = await User.findOne({ email: serviceData.email })
     if (user) {
@@ -19,7 +18,7 @@ module.exports.createUser = async serviceData => {
       lastName: serviceData.lastName,
       userName: serviceData.userName
     })
-  console.log(newUser)
+
     let result = await newUser.save()
 
     return result
@@ -82,6 +81,25 @@ module.exports.updateUserProfile = async serviceData => {
       {
         userName: serviceData.body.userName
       },
+      { new: true }
+    )
+
+    if (!user) {
+      throw new Error('User not found!')
+    }
+
+    return user.toObject()
+  } catch (error) {
+    console.error('Error in userService.js', error)
+    throw new Error(error)
+  }
+}
+
+module.exports.updateUserName = async (userId, newUserName) => {
+  try {
+    const user = await User.findByIdAndUpdate(
+      userId,
+      { userName: newUserName },
       { new: true }
     )
 
